@@ -2,7 +2,7 @@ from django.urls import path
 from bookstore.views import *
 
 urlpatterns = [
-    path('', list_books, name='list_books'),                            # List of all books
+    path('', BooksView.as_view(), name='list_books'),                   # List of all books
     path('book/<int:index>', current_book, name='current_book'),        # Show current book
     path('author/<int:index_author>/', about_author, name='author'),    # Show info about author
     path('create_book/', create_book, name='create_book'),              # Create new great book

@@ -10,6 +10,13 @@
 </head>
 <body>
 <div class="content_head">
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}"><p>Logout (exit)</p></a>
+        <h2>You logged on as: {{ user.username }}</h2>
+    {% else %}
+        <a href="{% url 'register' %}"><p>Registration (join)</p></a>
+        <a href="{% url 'login' %}"><p>Login (enter)</p></a>
+    {% endif %}
     <p>Input title book:</p>
     <p></p>
     <form action="" method="get">

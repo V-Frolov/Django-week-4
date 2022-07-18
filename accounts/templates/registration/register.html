@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new user</title>
+    <link rel="stylesheet" href="{% static 'bookstore/css/style.css' %}">
+</head>
+<body>
+<h3>Create new user</h3>
+
+<form action="" method="post">
+    {%csrf_token%}
+    {{ form.as_p }}
+    <input type="submit" value="Create">
+</form>
+
+<!--{% if form.errors %} {% for field in form %} {% for error in field.errors %}-->
+<!--<div class="alert alert-danger">-->
+<!--    <strong>{{ error|escape }}</strong>-->
+<!--</div>-->
+<!--{% endfor %} {% endfor %}{% endif %}-->
+
+<!--<form method="post" action="">-->
+<!--    {% csrf_token %}-->
+<!--    <table>-->
+
+<!--        <tr>-->
+<!--            <td>{{ form.username.label_tag }}</td>-->
+<!--            <td>{{ form.username }}</td>-->
+<!--        </tr>-->
+
+<!--        <tr>-->
+<!--            <td>{{ form.password1.label_tag }}</td>-->
+<!--            <td>{{ form.password1 }}</td>-->
+<!--            <td>{{ form.password2.label_tag }}</td>-->
+<!--            <td>{{ form.password2 }}</td>-->
+<!--        </tr>-->
+
+<!--    </table>-->
+
+<!--    <input type="submit" value="Register"/>-->
+<!--</form>-->
+
+</body>
+</html>

@@ -1,14 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from bookstore.models import Books, Authors
 from bookstore.forms import CreateBook
+from django.views.generic.base import View
+from django.views.generic.detail import DetailView
 
 
-def list_books(request):                            # List of all books
-    book = Books.objects.all()
-    if "search" in request.GET:
-        book_search = request.GET['search']
-        book = book.filter(title__contains=book_search)
-    if request.method == "POST":
+class BooksView(View):                              # List of all books
+    def post(self, request):
         form = CreateBook(request.POST)
         if form.is_valid():
             data = form.cleaned_data
@@ -18,8 +16,21 @@ def list_books(request):                            # List of all books
             author_id = data['author_id']
             Books.objects.create(title=title, released_year=released_year, description=description, author_id=author_id)
             book = Books.objects.all()
-    context = {'books': book, 'book_form': CreateBook}
-    return render(request, 'bookstore/List_books.html', context=context)
+        context = {'books': book, 'book_form': CreateBook}
+        return render(request, 'bookstore/List_books.html', context=context)
+
+    def get(self, request):
+        book = Books.objects.all()
+        if "search" in request.GET:
+            book_search = request.GET['search']
+            book = book.filter(title__contains=book_search)
+        context = {'books': book, 'book_form': CreateBook}
+        return render(request, 'bookstore/List_books.html', context=context)
+
+
+class BookDetailView(DetailView):                   # ???
+    model = Books
+    template_name = 'bookstore/Current_book.html'
 
 
 def current_book(request, index):                   # Show current book

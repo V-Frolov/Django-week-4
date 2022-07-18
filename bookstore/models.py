@@ -16,6 +16,10 @@ class Authors(models.Model):
     def __str__(self):
         return f"{self.pk} {self.last_name}"
 
+    class Meta:
+        verbose_name = 'Author'
+        verbose_name_plural = 'Authors'
+
 
 class Books(models.Model):
     title = models.CharField(max_length=128)
@@ -33,3 +37,30 @@ class Books(models.Model):
 
     def __str__(self):
         return f"{self.pk} {self.title}"
+
+    class Meta:
+        verbose_name = 'Book'
+        verbose_name_plural = 'Books'
+
+
+class Member(models.Model):
+    nickname: models.CharField(max_length=128)
+
+    def __str__(self):
+        return f"{self.nickname}"
+
+    class Meta:
+        verbose_name = 'Member'
+        verbose_name_plural = 'Members'
+
+
+class Profile(models.Model):
+    phone = models.CharField(max_length=16)
+    author = models.OneToOneField(Authors, on_delete=models.SET_NULL, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.phone} {authors}"
+
+    class Meta:
+        verbose_name = 'Profile'
+        verbose_name_plural = 'Profiles'

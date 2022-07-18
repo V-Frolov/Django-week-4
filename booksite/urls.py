@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('bookstore.urls')),
+    path('admin/', admin.site.urls),                                        # Enter to admin panel
+    path('', include('bookstore.urls')),                                    # Working with books
+    path('accounts', include('accounts.urls'))                              # Create new user
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
