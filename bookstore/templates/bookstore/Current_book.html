@@ -9,10 +9,17 @@
 </head>
 <body>
     <div class="content">
+        {% if user.is_authenticated %}
+        <p>!!!</p>
+        {% endif %}
         <h5>Book ID: {{books.id}}</h5>
         <h3>Title: {{books.title}}</h3>
         <p>Description: {{books.description}}</p>
         <p>Year of release: {{books.released_year}}</p>
+        <form action="{% url 'review' books.id %}" method="post">
+            {% csrf_token %}
+            {{ book_form.as_p }}
+        </form>
         <a href="{% url 'author' books.author_id %}"><p>About author</p></a>
         <a href="{% url 'delete_book' books.id %}"><p>Delete this book (!!!)</p></a>
         <a href="{% url 'list_books' %}"><p>List of all books</p></a>

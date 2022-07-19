@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from bookstore.models import Books, Authors
-from bookstore.forms import CreateBook
+from bookstore.forms import CreateBook, ReviewForm
 from django.views.generic.base import View
 from django.views.generic.detail import DetailView
 
@@ -86,3 +86,15 @@ def delete_book(request, index):                    # Delete this great book
     book = get_object_or_404(Books, id=index)
     book.delete()
     return redirect('list_books')
+
+
+class AddReview(View):
+    def post(self, request, pk):
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.reviews_id = pk
+            form.save()
+        context = {'book_form': form}
+        print('!!! form: ', type(form), '!!!', form)
+        return render(request, 'bookstore/Current_book.html', context=context)

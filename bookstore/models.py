@@ -64,3 +64,17 @@ class Profile(models.Model):
     class Meta:
         verbose_name = 'Profile'
         verbose_name_plural = 'Profiles'
+
+
+class Reviews(models.Model):
+    email = models.EmailField()
+    name = models.CharField("Name", max_length=128)
+    text = models.TextField("Message", max_length=2048)
+    parent = models.ForeignKey(Books, verbose_name="Book", on_delete=models.CASCADE, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.pk} - {self.name}"
+
+    class Meta:
+        verbose_name = 'Rewiew'
+        verbose_name_plural = 'Reviews'

@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Authors, Books, Member, Profile
+from .models import Authors, Books, Member, Profile, Reviews
 
 
 admin.site.register(Authors)
 admin.site.register(Member)
 admin.site.register(Profile)
+admin.site.register(Reviews)
 
 
 class BooksAdmin(admin.ModelAdmin):
